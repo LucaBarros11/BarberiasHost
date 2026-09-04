@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --espresso: #1c1410;
+  --oxblood: #6b1e23;
+  --brass: #b08d57;
+  --bone: #ede6d6;
+  --steel: #4a5a5e;
+  --tile: #2f3b2c;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--espresso);
+  color: var(--bone);
+}
+
+@layer components {
+  /* Grain overlay: apply on any relatively-positioned section */
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("/grain.svg");
+    background-size: 180px 180px;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+
+  /* Leather strap divider with a stitched seam running down the middle */
+  .leather-divider {
+    position: relative;
+    height: 3.25rem;
+    background: linear-gradient(180deg, #150f0c 0%, #241a14 50%, #150f0c 100%);
+    border-top: 1px solid rgba(176, 141, 87, 0.25);
+    border-bottom: 1px solid rgba(176, 141, 87, 0.25);
+    overflow: hidden;
+  }
+
+  .leather-divider::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 0;
+    border-top: 2px dashed rgba(237, 230, 214, 0.18);
+    transform: translateY(-50%);
+  }
+
+  /* Ticket-stub card: punched hole + perforated tear line on the left edge */
+  .ticket {
+    position: relative;
+    background: #241a14;
+    border: 1px solid rgba(176, 141, 87, 0.35);
+    padding: 1.75rem 1.75rem 1.75rem 2.5rem;
+  }
+
+  .ticket::before {
+    content: "";
+    position: absolute;
+    left: -0.65rem;
+    top: 50%;
+    width: 1.3rem;
+    height: 1.3rem;
+    background: var(--bg-hole, var(--espresso));
+    border: 1px solid rgba(176, 141, 87, 0.35);
+    border-radius: 9999px;
+    transform: translateY(-50%);
+  }
+
+  .ticket::after {
+    content: "";
+    position: absolute;
+    left: 1.35rem;
+    top: 0.6rem;
+    bottom: 0.6rem;
+    border-left: 2px dashed rgba(176, 141, 87, 0.4);
+  }
+
+  /* Rivet corner used on team ID-style cards */
+  .rivet {
+    position: absolute;
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 9999px;
+    background: radial-gradient(circle at 35% 35%, var(--brass-light, #cba96e), var(--brass, #b08d57) 60%, #7a5f37 100%);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+}
